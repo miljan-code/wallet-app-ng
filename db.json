@@ -1,0 +1,46 @@
+{
+  "users": [
+    {
+      "firstName": "Kirey",
+      "lastName": "Group",
+      "email": "admin@kireygroup.com",
+      "password": "Admin@kireygroup2023",
+      "accountAmount": 4990,
+      "id": "ds42br3"
+    }
+  ],
+  "transactions": [
+    {
+      "purchasedItem": "Motherboard",
+      "category": "Computers",
+      "date": "2023-10-14T08:44:23.906Z",
+      "amountSpent": 1000,
+      "userId": "ds42br3",
+      "id": 1
+    },
+    {
+      "purchasedItem": "iPhone",
+      "category": "Phones",
+      "date": "2023-10-14T10:36:22.261Z",
+      "amountSpent": 500,
+      "userId": "ds42br3",
+      "id": 2
+    },
+    {
+      "purchasedItem": "iPhone",
+      "category": "Phones",
+      "date": "2023-10-14T10:36:49.383Z",
+      "amountSpent": 350,
+      "userId": "ds42br3",
+      "id": 3
+    },
+    {
+      "purchasedItem": "iPhone X",
+      "category": "Phones",
+      "date": "2023-10-14T10:46:43.266Z",
+      "amountSpent": 510,
+      "userId": "ds42br3",
+      "id": 4
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+<section class="home">
+  <h2 class="home__label">
+    Welcome, <span class="marked">{{ username }}</span
+    >! 👋
+    <br />
+    Your account balance is
+    <span class="marked">{{ accountAmount }}</span>
+  </h2>
+  <p-button label="Change amount" (click)="dialogHandler()"></p-button>
+</section>
+
+<p-dialog
+  header="Change amount"
+  [(visible)]="dialogVisible"
+  [style]="{ width: '40rem' }"
+>
+  <form [formGroup]="amountForm" (ngSubmit)="changeAmount()" class="form">
+    <div class="form__group">
+      <label for="amount">Amount</label>
+      <input
+        id="amount"
+        type="number"
+        min="0"
+        pInputText
+        formControlName="accountAmount"
+      />
+    </div>
+    <div class="form__buttons">
+      <p-button
+        [disabled]="!amountForm.valid"
+        label="Save"
+        class="form__button"
+        type="submit"
+      ></p-button>
+      <p-button label="Cancel" (click)="dialogHandler()"></p-button>
+    </div>
+  </form>
+</p-dialog>

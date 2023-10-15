@@ -1,0 +1,15 @@
+@import "../../../styles/mixins.scss";
+
+.home {
+  padding-top: 48px;
+  text-align: center;
+
+  &__label {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+}
+
+.marked {
+  @include text-gradient(#a5b4fc, #60a5fa);
+}

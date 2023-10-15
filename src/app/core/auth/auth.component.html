@@ -1,0 +1,112 @@
+<div class="auth">
+  <p-card
+    [style]="{ width: '32rem', position: 'relative', zIndex: '1' }"
+    styleClass="auth__card"
+  >
+    <h2 class="auth__header">Sign in</h2>
+    <p class="auth__subheader">Please sign in to continue using Wallet App</p>
+    <form [formGroup]="loginForm" (ngSubmit)="submitLogin()" class="form">
+      <div class="form__group">
+        <label for="email">E-mail address</label>
+        <input id="email" type="email" pInputText formControlName="email" />
+        <p
+          *ngIf="loginForm.get('email')?.hasError('wrongEmail')"
+          style="color: var(--red-400)"
+        >
+          Email address is incorrect.
+        </p>
+      </div>
+      <div class="form__group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          pInputText
+          formControlName="password"
+        />
+        <p
+          *ngIf="loginForm.get('password')?.hasError('wrongPassword')"
+          style="color: var(--red-400)"
+        >
+          Password is incorrect.
+        </p>
+      </div>
+      <div class="form__buttons">
+        <p-button label="Sign in" class="form__button" type="submit"></p-button>
+        <p-button (click)="showDialog()" label="Sign up"></p-button>
+      </div>
+    </form>
+  </p-card>
+  <p-dialog
+    header="Sign up"
+    [(visible)]="dialogVisible"
+    [style]="{ width: '40rem' }"
+  >
+    <form [formGroup]="registerForm" (ngSubmit)="submitRegister()" class="form">
+      <div class="form__group">
+        <label for="firstName">First name</label>
+        <input
+          id="firstName"
+          type="text"
+          pInputText
+          formControlName="firstName"
+        />
+      </div>
+      <div class="form__group">
+        <label for="lastName">Last name</label>
+        <input
+          id="lastName"
+          type="text"
+          pInputText
+          formControlName="lastName"
+        />
+      </div>
+      <div class="form__group">
+        <label for="email">E-mail address</label>
+        <input id="email" type="email" pInputText formControlName="email" />
+        <p
+          *ngIf="registerForm.get('email')?.hasError('emailExist')"
+          style="color: var(--red-400)"
+        >
+          Email address already exist
+        </p>
+        <div *ngIf="loading" class="spinner"></div>
+      </div>
+      <div class="form__group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          pInputText
+          formControlName="password"
+        />
+        <p
+          *ngIf="registerForm.get('password')?.hasError('passwordRequirements')"
+          style="color: var(--red-400)"
+        >
+          Password should be a mix of uppercase, lowercase, numeric, special
+          characters and 5 characters long.
+        </p>
+      </div>
+      <div class="form__group">
+        <label for="accountAmount">Account amount</label>
+        <input
+          id="accountAmount"
+          type="number"
+          pInputText
+          formControlName="accountAmount"
+          min="0"
+        />
+      </div>
+      <div class="form__buttons">
+        <p-button
+          [disabled]="!registerForm.valid"
+          label="Sign up"
+          class="form__button"
+          type="submit"
+        ></p-button>
+        <p-button label="Cancel" (onClick)="showDialog()"></p-button>
+      </div>
+    </form>
+  </p-dialog>
+</div>

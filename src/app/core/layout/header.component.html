@@ -1,0 +1,20 @@
+<header class="header">
+  <a [routerLink]="['/']" class="header__logo">
+    <i class="pi pi-wallet header__logo-icon"></i>
+    <span class="header__logo-label">Wallet App</span>
+  </a>
+  <nav class="header__nav">
+    <a [routerLink]="['/']" class="header__nav-item">My Account</a>
+    <a [routerLink]="['/transactions']" class="header__nav-item"
+      >Transactions</a
+    >
+    <a *ngIf="isAdmin" [routerLink]="['/admin']" class="header__nav-item"
+      >Admin</a
+    >
+    <p-button
+      (onClick)="signOut()"
+      icon="pi pi-sign-out"
+      styleClass="p-button-link"
+    ></p-button>
+  </nav>
+</header>

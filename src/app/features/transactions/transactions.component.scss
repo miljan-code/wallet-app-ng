@@ -1,0 +1,25 @@
+.transactions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 48px 0;
+
+  &__empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    padding: 32px 96px;
+    border: 1px dashed var(--indigo-300);
+    border-radius: 4px;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

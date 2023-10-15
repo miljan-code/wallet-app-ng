@@ -1,0 +1,73 @@
+<section class="admin">
+  <div *ngIf="!users.length && !isLoading" class="admin__empty-state">
+    <p>There are no users</p>
+  </div>
+
+  <div *ngIf="users.length && !isLoading" class="admin__container">
+    <p-table
+      [value]="users"
+      [tableStyle]="{ 'min-width': '25rem' }"
+      styleClass="table"
+      responsiveLayout="stack"
+      [breakpoint]="'640px'"
+    >
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="background: #16161666; border-top-left-radius: 6px">
+            First name
+          </th>
+          <th style="background: #16161666">Last name</th>
+          <th style="background: #16161666">Email</th>
+          <th style="background: #16161666">Amount</th>
+          <th style="background: #16161666; border-top-right-radius: 6px">
+            Actions
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-user
+        let-columns="columns"
+        *ngFor="let user of users"
+      >
+        <tr style="background: #16161666">
+          <td>
+            <span class="p-column-title">First name</span>
+            {{ user.firstName }}
+          </td>
+          <td>
+            <span class="p-column-title">Last name</span>
+            {{ user.lastName }}
+          </td>
+          <td>
+            <span class="p-column-title">Email</span>
+            {{ user.email }}
+          </td>
+          <td>
+            <span class="p-column-title">Amount</span>
+            {{ user.accountAmount }}
+          </td>
+          <td>
+            <span class="p-column-title">Actions</span>
+            <div>
+              <i
+                class="pi pi-file-edit"
+                style="margin-right: 8px; font-size: 1.4rem; cursor: pointer"
+                (click)="showDialog(user.id)"
+              ></i>
+              <i
+                class="pi pi-trash"
+                style="font-size: 1.4rem; cursor: pointer"
+                (click)="confirmDelete(user.id)"
+              ></i>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <app-admin-dialog />
+
+  <p-confirmDialog header="Confirm delete" [style]="{ width: '40rem' }" />
+</section>

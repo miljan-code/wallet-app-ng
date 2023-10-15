@@ -1,0 +1,81 @@
+<section class="transactions">
+  <div
+    *ngIf="!transactions.length && !isLoading"
+    class="transactions__empty-state"
+  >
+    <p>There are no transactions yet</p>
+    <p-button label="Add transaction" (click)="showDialog(null)" />
+  </div>
+
+  <div
+    *ngIf="transactions.length && !isLoading"
+    class="transactions__container"
+  >
+    <p-table
+      [value]="transactions"
+      [tableStyle]="{ 'min-width': '25rem' }"
+      styleClass="table"
+      responsiveLayout="stack"
+      [breakpoint]="'640px'"
+    >
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="background: #16161666; border-top-left-radius: 6px">
+            Date of purchase
+          </th>
+          <th style="background: #16161666">Item purchased</th>
+          <th style="background: #16161666">Item category</th>
+          <th style="background: #16161666">Amount spent</th>
+          <th style="background: #16161666; border-top-right-radius: 6px">
+            Actions
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-transaction
+        let-columns="columns"
+        *ngFor="let transaction of transactions"
+      >
+        <tr style="background: #16161666">
+          <td>
+            <span class="p-column-title">Date of purchase</span>
+            {{ transaction.date | date : "dd MMM, yyyy HH:mm" }}
+          </td>
+          <td>
+            <span class="p-column-title">Purchased item</span
+            >{{ transaction.purchasedItem }}
+          </td>
+          <td>
+            <span class="p-column-title">Category</span>
+            {{ transaction.category }}
+          </td>
+          <td>
+            <span class="p-column-title">Spent amount</span>
+            {{ transaction.amountSpent }}
+          </td>
+          <td>
+            <span class="p-column-title">Actions</span>
+            <div class="">
+              <i
+                class="pi pi-file-edit"
+                style="margin-right: 8px; font-size: 1.4rem; cursor: pointer"
+                (click)="showDialog(transaction)"
+              ></i>
+              <i
+                class="pi pi-trash"
+                style="font-size: 1.4rem; cursor: pointer"
+                (click)="confirmDelete(transaction.id)"
+              ></i>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-button label="Add transaction" (click)="showDialog(null)" />
+  </div>
+
+  <app-transaction-dialog [transactions]="transactions" />
+
+  <p-confirmDialog header="Confirm delete" [style]="{ width: '40rem' }" />
+</section>

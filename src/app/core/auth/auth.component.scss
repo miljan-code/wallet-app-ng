@@ -1,0 +1,39 @@
+@import "../../../styles/mixins.scss";
+
+.auth {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+
+  &__header {
+    font-size: 2rem;
+    margin-bottom: 4px;
+  }
+
+  &__subheader {
+    color: var(--text-muted);
+  }
+}
+
+:host {
+  ::ng-deep .auth__card {
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+
+      width: 100%;
+      height: 100%;
+
+      @include background-gradient();
+      filter: blur(100px) saturate(150%);
+      opacity: 0.1;
+    }
+  }
+}

@@ -1,0 +1,64 @@
+<p-dialog
+  header="{{ editTx ? 'Edit' : 'Add' }} transaction"
+  [(visible)]="dialogVisible"
+  [style]="{ width: '40rem' }"
+>
+  <form
+    [formGroup]="transactionForm"
+    (ngSubmit)="
+      editTx ? editTransaction(editTx.id, isAdminEdit) : submitTransaction()
+    "
+    class="form"
+  >
+    <div class="form__group">
+      <label for="purchasedItem">Purchased Item</label>
+      <input
+        id="purchasedItem"
+        type="text"
+        pInputText
+        formControlName="purchasedItem"
+      />
+    </div>
+    <div class="form__group">
+      <label for="category">Category</label>
+      <input id="category" type="text" pInputText formControlName="category" />
+    </div>
+    <div class="form__group">
+      <label for="date">Time and date</label>
+      <p-calendar
+        id="date"
+        [showTime]="true"
+        appendTo="body"
+        formControlName="date"
+      ></p-calendar>
+    </div>
+    <div class="form__group">
+      <label for="amountSpent">Amount spent</label>
+      <input
+        id="amountSpent"
+        type="number"
+        min="0"
+        pInputText
+        formControlName="amountSpent"
+        [defaultValue]="editTx ? editTx.amountSpent : 0"
+      />
+      <p
+        *ngIf="
+          transactionForm.get('amountSpent')?.hasError('insufficientAmount')
+        "
+        style="color: var(--red-400)"
+      >
+        You don't have enough money to perform this action
+      </p>
+    </div>
+    <div class="form__buttons">
+      <p-button
+        [disabled]="!transactionForm.valid"
+        label="Save"
+        class="form__button"
+        type="submit"
+      ></p-button>
+      <p-button label="Cancel" (onClick)="showDialog(null)"></p-button>
+    </div>
+  </form>
+</p-dialog>
